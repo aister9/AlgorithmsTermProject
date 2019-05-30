@@ -13,5 +13,16 @@ private:
 public:
 	Maze();
 	Maze(string filename);
+	Maze(int* _map, int nsize, int msize);
+	int getMapSize() const;
+	void setN(const int& nSize);
+	void setM(const int& mSize);
+	int getN() const;
+	int getM() const;
+	int getMapDataPos(const mPoint& pos) const;
+	int* getMap() const;
+	bool isValid(const int& x, const int& y) const;
+	bool canView(const mPoint &pos) const;
+	bool isCrossRoad(const mPoint &pos) const;
 	friend ostream& operator<< (ostream& os, const Maze &m);
 };
