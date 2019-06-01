@@ -72,6 +72,7 @@ void Maze::setN(const int& nSize) { this->nSize = nSize; }
 void Maze::setM(const int& mSize) { this->mSize = mSize; }
 int* Maze::getMap() const { return map; }
 int Maze::getM()const { return mSize; }
+mPoint Maze::getEntrance() const { return entrance; }
 int Maze::getN()const { return nSize; }
 int Maze::getMapSize()const {
 	return nSize * mSize;
@@ -82,10 +83,22 @@ int Maze::getMapDataPos(const mPoint& pos) const {
 bool Maze::isValid(const int& x, const int& y) const {
 	if (x < 0) return false;
 	if (y < 0) return false;
-	if (x >= mSize) return false;
-	if (y >= nSize) return false;
+	if (x >= nSize) return false;
+	if (y >= mSize) return false;
 
 	return true;
+}
+bool Maze::isEnd(mPoint &pos) const {
+	int x = pos.getX(); int y = pos.getY();
+	
+	if (pos == entrance) return false;
+
+	if (!isValid(x - 1, y)) { return true; }
+	if (!isValid(x, y - 1)) { return true; }
+	if (!isValid(x + 1, y)) { return true; }
+	if (!isValid(x, y - 1)) { return true; }
+
+	return false;
 }
 bool Maze::canView(const mPoint &pos) const {
 	return (map[nSize * pos.getY() + pos.getX()] == 0) || (map[nSize * pos.getY() + pos.getX()] == 1);
@@ -101,4 +114,27 @@ bool Maze::isCrossRoad(const mPoint &pos) const {
 	if (isValid(x, y-1)) { s += map[nSize * (y+1) + x]; }
 
 	return s < 2;
+}
+int Maze::numofBrunch(const mPoint &pos) const {
+	int x = pos.getX(); int y = pos.getY();
+
+	int s = 0;
+	if (isValid(x - 1, y)) { s += map[nSize * y + (x - 1)]; }
+	if (isValid(x, y - 1)) { s += map[nSize * (y - 1) + x]; }
+	if (isValid(x + 1, y)) { s += map[nSize * y + (x + 1)]; }
+	if (isValid(x, y - 1)) { s += map[nSize * (y + 1) + x]; }
+
+	return s;
+}
+
+bool Maze::isDeadEnd(const mPoint &pos) const {
+	int x = pos.getX(); int y = pos.getY();
+
+	int s = 0;
+	if (isValid(x - 1, y)) { s += map[nSize * y + (x - 1)]; }
+	if (isValid(x, y - 1)) { s += map[nSize * (y - 1) + x]; }
+	if (isValid(x + 1, y)) { s += map[nSize * y + (x + 1)]; }
+	if (isValid(x, y - 1)) { s += map[nSize * (y + 1) + x]; }
+
+	return s == 3;
 }
