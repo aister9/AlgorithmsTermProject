@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <string>
 using namespace std;
 
 class mPoint {
@@ -24,5 +25,9 @@ public:
 	}
 	bool operator!=(const mPoint &p) {
 		return x != p.getX() || y != p.getY();
+	}
+
+	string toString() {
+		return "( " + to_string(x) + ", " + to_string(y) + " )";
 	}
 };

@@ -15,13 +15,13 @@ int main() {
 	}
 	Mouse player(m.getMapSize() * 2);
 	cout << player;
-	if (player.search(m)) {
+	if (player.search2(m)) {
 		player.visionMazeData(m);
-		cout << player;
+		//cout << player;
 		cout << " Mouse Exit " << endl;
 	}
 	else {
-		cout << player;
+		//cout << player;
 		cout << " can`t found way " << endl;
 	}
 

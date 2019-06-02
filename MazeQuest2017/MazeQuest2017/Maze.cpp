@@ -103,7 +103,13 @@ bool Maze::isEnd(mPoint &pos) const {
 bool Maze::canView(const mPoint &pos) const {
 	return (map[nSize * pos.getY() + pos.getX()] == 0) || (map[nSize * pos.getY() + pos.getX()] == 1);
 }
-
+bool Maze::isRoad(const int& x, const int& y) const {
+	if (!isValid(x, y)) return false;
+	return (map[nSize * y + x] == 0);
+}
+bool Maze::isRoad(const mPoint &pos) const {
+	return isRoad(pos.getX(), pos.getY());
+}
 bool Maze::isCrossRoad(const mPoint &pos) const {
 	int x = pos.getX(); int y = pos.getY();
 	
@@ -118,11 +124,11 @@ bool Maze::isCrossRoad(const mPoint &pos) const {
 int Maze::numofBrunch(const mPoint &pos) const {
 	int x = pos.getX(); int y = pos.getY();
 
-	int s = 0;
-	if (isValid(x - 1, y)) { s += map[nSize * y + (x - 1)]; }
-	if (isValid(x, y - 1)) { s += map[nSize * (y - 1) + x]; }
-	if (isValid(x + 1, y)) { s += map[nSize * y + (x + 1)]; }
-	if (isValid(x, y - 1)) { s += map[nSize * (y + 1) + x]; }
+	int s = 4;
+	if (isValid(x - 1, y)) { s -= map[nSize * y + (x - 1)]; }
+	if (isValid(x, y - 1)) { s -= map[nSize * (y - 1) + x]; }
+	if (isValid(x + 1, y)) { s -= map[nSize * y + (x + 1)]; }
+	if (isValid(x, y - 1)) { s -= map[nSize * (y + 1) + x]; }
 
 	return s;
 }

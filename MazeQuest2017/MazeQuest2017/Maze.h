@@ -28,5 +28,7 @@ public:
 	bool canView(const mPoint &pos) const;
 	bool isCrossRoad(const mPoint &pos) const;
 	bool isDeadEnd(const mPoint &pos) const;
+	bool isRoad(const int& x, const int& y) const;
+	bool isRoad(const mPoint &pos) const;
 	friend ostream& operator<< (ostream& os, const Maze &m);
 };
