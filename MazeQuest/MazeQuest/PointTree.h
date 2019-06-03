@@ -9,7 +9,7 @@ private:
 	PointTree *child3;
 	mPoint *data;
 public:
-	bool isVisit = false;
+	bool isVisit = false; //방문 했었는지
 	PointTree() : parent(nullptr), child1(nullptr), child2(nullptr), child3(nullptr), data(nullptr) {}
 	PointTree(mPoint *p) {
 		PointTree();

@@ -17,36 +17,36 @@ bool search_list(list<T> list, T item) {
 
 class Mouse {
 private:
-	int energy;
-	double mana;
-	int stepNum;
-	mPoint curPos;
-	list<mPoint> visitPos;
-	stack<mPoint> crossPos;
-	Maze mazeData;
-	int *visitNum;
-	int maxXpos = 0;
-	int maxYpos = 0;
-	int direction = 0;
-	int chk = 0;
-	string telp;
-	PointTree *map;
+	int energy; // 총 에너지량
+	double mana; //보유 마나량
+	int stepNum; //현재까지 걸음 수
+	mPoint curPos; // 현재 위치
+	list<mPoint> visitPos; //방문했던 위치들
+	stack<mPoint> crossPos; //교차로 위치를 스택 구조로 저장
+	Maze mazeData; //쥐가 기억하는 맵 데이터
+	int *visitNum; //해당 포지션에 몇번 방문했는지를 저장하는 배열
+	int maxXpos = 0; // 지금까지 방문 했던 장소중 가장 큰 X 값
+	int maxYpos = 0; // 지금까지 방문 했던 장소중 가장 큰 Y 값
+	int direction = 0; //진행 방향
+	int chk = 0; //해당 위치에서 방향을 체크한 횟수
+	string telp; //텔레포트 로그를 스트링으로 만든 것
+	PointTree *map; // 쥐가 이동하여 짜는 지도를 트리형태로 구현 한 것
 public:
-	Mouse(const int &energy);
-	void moveToPos(const mPoint& targetPoint);
-	void teleport();
-	void step();
+	Mouse(const int &energy); //생성자
+	void moveToPos(const mPoint& targetPoint); //targetPoint로 이동함
+	void teleport(); //crossPos의 top으로 텔레포트함
+	void step(); //한 걸음 진행했다고 알려줌
 	
-	void initMazeData(const int& mazeSize);
-	void setMazeData(const Maze &md) ;
-	void visionMazeData(const Maze& md);
+	void initMazeData(const int& mazeSize); //mazeSize로 쥐가 가지고 있는 맵 데이터를 초기화한다
+	void setMazeData(const Maze &md) ; //md로 쥐의 맵을 설정함( 쥐가 md라는 맵으로 들어감)
+	void visionMazeData(const Maze& md); //해당 위치에 있을때 md로부터 데이터를 읽어와 맵을 밝힘
 
-	PointTree* getMapTree() const { return map; }
+	PointTree* getMapTree() const { return map; } //Map Tree를 반환
 
-	bool search(const Maze& md) ;
-	bool search2(const Maze& md);
+	bool search(const Maze& md) ; //실패한 서치 방식
+	bool search2(const Maze& md); //DFS를 구현함
 
-	friend ostream& operator<<(ostream& os, const Mouse& m);
+	friend ostream& operator<<(ostream& os, const Mouse& m); //Print() override
 };
 
 ostream& operator<<(ostream& os, const Mouse& m) {
