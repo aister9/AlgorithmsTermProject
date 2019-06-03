@@ -130,6 +130,7 @@
     <ClInclude Include="Maze.h" />
     <ClInclude Include="Mouse.h" />
     <ClInclude Include="Point.h" />
+    <ClInclude Include="PointTree.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
