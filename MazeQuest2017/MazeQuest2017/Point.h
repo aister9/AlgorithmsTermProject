@@ -30,4 +30,6 @@ public:
 	string toString() {
 		return "( " + to_string(x) + ", " + to_string(y) + " )";
 	}
+
+	int distance(const mPoint& p) { return abs(x - p.getX()) + abs(y - p.getY()); }
 };
