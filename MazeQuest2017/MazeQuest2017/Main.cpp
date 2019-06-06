@@ -3,11 +3,13 @@
 #include "Maze.h"
 #include "Mouse.h"
 #include <stdlib.h>
+#include <fstream>
 
 string FileSelector();
 
 int main() {
-	Maze m(FileSelector());
+	string fname = FileSelector();
+	Maze m(fname);
 
 	cout << "Mouse Energy Allocation : " << m.getMapSize() * 2 << endl;
 	cout << m;
@@ -19,13 +21,29 @@ int main() {
 	cout << player;
 	if (player.search2(m)) {
 		player.visionMazeData(m);
-		//cout << player;
+
+		//result txt
+		string outputfname = fname;
+		for (int i = 0; i < 4; i++) outputfname.pop_back(); // ".txt" remove
+		outputfname += "_result.txt";
+		ofstream output(outputfname);
+
+		output << "result path" << endl;
+		output << player;
+
+		output.close();
+
+		cout << player;
+		cout << "File Save Complete" << endl;
 		cout << " Mouse Exit " << endl;
 	}
 	else {
 		//cout << player;
 		cout << " can`t found way " << endl;
 	}
+
+	
+
 
 	system("pause");
 }

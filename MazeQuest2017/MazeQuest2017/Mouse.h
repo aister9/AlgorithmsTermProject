@@ -298,6 +298,20 @@ bool Mouse::search2(const Maze& md) {
 			cout << "Next(up) : " << childList.back();
 		}
 
+		if(childList.size() >= 2) // child Node is over 2  == is crossRoad
+			if (curPos.getX() == 1) { // if mouse`s current position is 1 (left side first search)
+				int s = childList.size();
+				for (int i = 0; i < s; i++) {
+					if (*childList.front()->getData() == *left) {
+						break;
+					}
+					else {
+						childList.push(childList.front());
+						childList.pop();
+					}
+				}
+			}
+
 		//차일드 노드가 null이면 연결하고, 아니면 방문했는지를 체크하고 이동함
 		if (curNode->getChild1() != nullptr) {
 			if (curNode->getChild1()->isVisit) {
